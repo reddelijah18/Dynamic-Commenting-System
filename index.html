@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>Welcome to the Comment Section!</header>
+    <div class="wrapper">
+      <form onSubmit="{this.addComment}">
+        <div className="field">
+          <div className="control">
+            <label
+              >Name:
+              <input
+                required
+                type="text"
+                className="input"
+                name="name"
+                placeholder="Your name"
+              />
+            </label>
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <label
+              >Email Address:
+              <input
+                required
+                type="email"
+                className="input"
+                name="email"
+                placeholder="Email Address"
+              />
+            </label>
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <textarea
+              className="textarea"
+              name="comment"
+              cols="40"
+              rows="7"
+              placeholder="Add a comment"
+            ></textarea>
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <input required type="checkbox" className="input" name="checkbox" />
+            <label>Would you like your comment to be posted?</label>
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <button className="button is-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <p id="data"></p>
+    <script>
+      function myFunction() {
+        let data = "";
+        let name = document.getElementById("userName").value;
+        let email = document.getElementById("userEmail").value;
+        let comment = document.getElementById("userComment").value;
+
+        data =
+          "User name : " +
+          name +
+          "<br/>User email : " +
+          email +
+          "<br/>User comment : " +
+          comment;
+
+        document.getElementById("data").innerHTML = data; // display data to paragraph
+      }
+    </script>
+    <comment-box></comment-box>
+  </body>
+</html>

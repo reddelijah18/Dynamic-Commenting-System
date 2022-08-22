@@ -1,4 +1,9 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-shadow */
+/* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+import { openDB } from 'idb';
 import { createComment } from './comment';
 import './style.css';
 
@@ -78,8 +83,34 @@ document.querySelector('#app').innerHTML = `
   </template>
 `;
 
-document.querySelector('form').addEventListener('submit', (ev) => {
-  ev.preventDefault();
-  createComment();
-});
+window.addEventListener('DOMContentLoaded', async () => {
+  // Set up the database
+  const idb = await openDB('comments-store', 1, {
+    upgrade(db) {
+      db.createObjectStore('comments');
+    },
+  });
+
+  if (!('indexedDB' in window)) {
+    console.log("This browser doesn't support IndexedDB.");
+    return;
+  }
+
+  const dbPromise = idb.open('comments', 1, (upgradeDb) => {
+    if (!upgradeDb.objectStoreNames.contains('email')) {
+      upgradeDb.createObjectStore('email', { keyPath: 'email' });
+    }
+    if (!upgradeDb.objectStoreNames.contains('name')) {
+      upgradeDb.createObjectStore('name', { autoIncrement: true });
+    }
+    if (!upgradeDb.objectStoreNames.contains(Comment)) {
+      upgradeDb.createObjectStore('comment', { autoIncrement: true });
+    }
+  });
+
+  document.querySelector('form').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    createComment();
+  });
 // document.querySelector("#submit").addEventListener("click", load());
+});

@@ -55,19 +55,32 @@ export default class Comment extends HTMLElement {
   }
 }
 
-customElements.define('comment-com', Comment);
+customElements.define('movie-comment', Comment);
 
 export const createComment = () => {
   const nameValue = document.getElementById('name').value;
   const emailValue = document.getElementById('email').value;
-  const commentValue = document.getElementById('comment').value;
+  const commentValue = document.getElementById('movie-comment').value;
 
-  const component = document.createElement('comment-com');
+  // const component = document.createElement('comment');
 
-  component.setAttribute('name', nameValue);
-  component.setAttribute('email', emailValue);
-  component.setAttribute('comment', commentValue);
+  const template = document.createElement('div');
+  template.setAttribute('id', 'template');
+  const name = document.createElement('div');
+  name.setAttribute('id', 'usersname');
+  const email = document.createElement('div');
+  email.setAttribute('id', 'users-email');
+  const comment = document.createElement('div');
+  comment.setAttribute('id', 'users-comment');
+  template.appendChild(name);
+  template.appendChild(email);
+  template.addpendChild(comment);
+
+
+  template.setAttribute('name', nameValue);
+  template.setAttribute('email', emailValue);
+  template.setAttribute('comment', commentValue);
 
   const results = document.querySelector('#results-field');
-  results.append(component);
+  results.append(template);
 };

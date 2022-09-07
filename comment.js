@@ -6,27 +6,6 @@ export default class Comment extends HTMLElement {
     super();
   }
 
-  // when we already have the custom compenent on the page
-  static get observedAttributes() {
-    return ['name', 'email', 'comment'];
-  }
-
-  attributeChangedCallback(property, oldValue, newValue) {
-    if (oldValue === newValue) return;
-
-    if (property === 'name') {
-      this.namePlaceholder.textContent = newValue;
-    }
-
-    if (property === 'email') {
-      this.emailPlaceholder.textContent = newValue;
-    }
-
-    if (property === 'comment') {
-      this.commentPlaceholder.textContent = newValue;
-    }
-  }
-
   connectedCallback() {
     const shadow = this.attachShadow({ mode: 'open' });
 
